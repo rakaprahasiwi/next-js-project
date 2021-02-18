@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getMovies } from '../actions'
 import Carousel from '../components/carousel'
 import Footer from '../components/footer'
@@ -10,11 +10,20 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
   const [movies, setMovies] = useState([])
+  const [count, setCount] = useState(0)
 
-  getMovies().then((movies) => {
-    setMovies(movies)
-  })
-  
+  useEffect(() => {
+    const fetchData = async () => {
+      const resMovies = await getMovies()
+      setMovies(resMovies)
+    }
+
+    fetchData();
+    // getMovies().then((movies) => {
+    //   setMovies(movies)
+    // })
+  }, [count])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -28,6 +37,7 @@ export default function Home() {
       <Navbar />
       <div className="home-page">
         <div className="container">
+          <button onClick={() => setCount(count + 1)}>Click this!</button>
           <div className="row">
 
             <div className="col-lg-3">
