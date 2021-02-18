@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useState } from 'react'
 import Carousel from '../components/carousel'
 import Footer from '../components/footer'
 import MovieList from '../components/movieList'
@@ -7,6 +8,20 @@ import SideMenu from '../components/sideMenu'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+  const [count, setCount] = useState(0)
+  // const stateArray = useState(0)
+  // const count = stateArray[0]
+  // const setCount = stateArray[1]
+
+  const increment = () => {
+    const newCount = count + 1
+    setCount(newCount)
+  }
+
+  const decrement = () => {
+    const newCount = count - 1
+    setCount(newCount)
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -18,26 +33,37 @@ export default function Home() {
       </Head>
 
       <Navbar />
+      <div className="home-page">
+        <div className="container">
+          <button onClick={increment} className="btn btn-primary">Increment Number</button>
+          <button onClick={decrement} className="btn btn-primary">Decrement Number</button>
+          <div className="row">
 
-      <div className="container">
-        <div className="row">
+            <div className="col-lg-3">
+              <SideMenu
+                appName={"Shop Aiam"}
+                clickHandler={() => { console.log("I click this!!") }}
+                count={count} />
+            </div>
 
-          <div className="col-lg-3">
-            <SideMenu />
-          </div>
+            <div className="col-lg-9">
+              <Carousel />
 
-          <div className="col-lg-9">
-            <Carousel />
+              <div className="row">
+                <MovieList count={count} />
 
-            <div className="row">
-              <MovieList />
-
+              </div>
             </div>
           </div>
         </div>
       </div>
-
       <Footer />
+      <style jsx>{`
+        .home-page{
+          padding-top: 50px;
+        }
+      `}
+      </style>
     </div>
   )
 }
