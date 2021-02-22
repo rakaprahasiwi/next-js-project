@@ -5,10 +5,7 @@ import Footer from '../components/footer'
 
 class MovieApp extends App {
   static async getInitialProps(appContext) {
-    console.log('call getInitialProps from _App')
     const appProps = await App.getInitialProps(appContext)
-
-    console.log(appProps)
 
     return { ...appProps }
   }
@@ -31,7 +28,7 @@ class MovieApp extends App {
         <Footer />
         <style jsx>{`
         .base-page{
-          padding-top: 50px;
+          padding-top: 80px;
         }
       `}
         </style>

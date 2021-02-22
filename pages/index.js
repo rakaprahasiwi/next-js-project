@@ -36,9 +36,7 @@ export default function Home(props) {
 }
 
 Home.getInitialProps = async () => {
-  console.log('call getInitialProps from Home')
   const movies = await getMovies()
-  console.log(movies)
   return {
     movies
   }
