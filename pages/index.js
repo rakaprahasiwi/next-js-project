@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react'
-import { getMovies } from '../actions'
+import { getCaregories, getMovies } from '../actions'
 import Carousel from '../components/carousel'
 import MovieList from '../components/movieList'
 import SideMenu from '../components/sideMenu'
@@ -9,7 +9,7 @@ import React from 'react'
 
 export default function Home(props) {
 
-  const { images } = props
+  const { images, categories, movies } = props
 
   return (
     <div className={styles.container}>
@@ -19,6 +19,7 @@ export default function Home(props) {
 
             <div className="col-lg-3">
               <SideMenu
+                categories={categories}
                 appName={"Shop Aiam"} />
             </div>
 
@@ -26,7 +27,7 @@ export default function Home(props) {
               <Carousel images={images} />
 
               <div className="row">
-                <MovieList movies={props.movies || []} />
+                <MovieList movies={movies || []} />
 
               </div>
             </div>
@@ -39,6 +40,7 @@ export default function Home(props) {
 
 Home.getInitialProps = async () => {
   const movies = await getMovies()
+  const categories = await getCaregories()
   const images = movies.map(movie => ({
     id: `image-${movie.id}`,
     url: movie.cover,
@@ -46,7 +48,8 @@ Home.getInitialProps = async () => {
   }))
   return {
     movies,
-    images
+    images,
+    categories
   }
 }
 
