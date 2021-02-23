@@ -9,6 +9,8 @@ import React from 'react'
 
 export default function Home(props) {
 
+  const { images } = props
+
   return (
     <div className={styles.container}>
       <div className="home-page">
@@ -21,7 +23,7 @@ export default function Home(props) {
             </div>
 
             <div className="col-lg-9">
-              <Carousel />
+              <Carousel images={images} />
 
               <div className="row">
                 <MovieList movies={props.movies || []} />
@@ -37,8 +39,14 @@ export default function Home(props) {
 
 Home.getInitialProps = async () => {
   const movies = await getMovies()
+  const images = movies.map(movie => ({
+    id: `image-${movie.id}`,
+    url: movie.cover,
+    name: movie.name
+  }))
   return {
-    movies
+    movies,
+    images
   }
 }
 
