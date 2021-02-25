@@ -3,8 +3,12 @@ import { useState } from "react"
 const MovieCreateForm = (props) => {
 
     const [form, setForm] = useState({
-        name: 'Aku Cinta Padamu',
-        description: 'serius nihhhhh'
+        name: '',
+        description: '',
+        rating: '',
+        image: '',
+        cover: '',
+        long_desc: ''
     })
 
     const handleChange = (event) => {
@@ -35,12 +39,11 @@ const MovieCreateForm = (props) => {
     }
 
     const submitForm = () => {
-        props.handleFormSubmit({...form})
+        props.handleFormSubmit({ ...form })
     }
 
     return (
         <form>
-            {JSON.stringify(form)}
             <div className="form-group">
                 <label htmlFor="name">Name</label>
                 <input
