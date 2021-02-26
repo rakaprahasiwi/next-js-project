@@ -5,7 +5,7 @@ const MovieCreateForm = (props) => {
     const [form, setForm] = useState({
         name: '',
         description: '',
-        rating: '',
+        rating: 5,
         image: '',
         cover: '',
         long_desc: ''
@@ -68,7 +68,7 @@ const MovieCreateForm = (props) => {
                     placeholder="Somewhere in Middle-earth..." />
             </div>
             <div className="form-group">
-                <label htmlFor="description">Rating</label>
+                <label htmlFor="rating">Rating</label>
                 <input
                     onChange={handleChange}
                     value={form.rating}
