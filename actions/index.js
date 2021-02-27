@@ -33,6 +33,10 @@ export const deleteMovie = (id) => {
     return axios.delete(`${BASE_URL}/api/v1/movies/${id}`).then(res => res.data)
 }
 
+export const getPosts = () => {
+    return axios.get(`${BASE_URL}/api/v1/posts`).then(res => res.data)
+}
+
 export const getCaregories = () => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
