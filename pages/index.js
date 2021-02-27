@@ -10,6 +10,21 @@ import React from 'react'
 export default function Home(props) {
 
   const { images, categories, movies } = props
+  const [filter, setFilter] = useState('all')
+
+  const changeCategory = category => {
+    setFilter(category)
+  }
+
+  const filterMovies = movies => {
+    if (filter === 'all') {
+      return movies
+    }
+    
+    return movies.filter((m) => {
+      return m.genre && m.genre.includes(filter)
+    })
+  }
 
   return (
     <div className={styles.container}>
@@ -19,15 +34,17 @@ export default function Home(props) {
 
             <div className="col-lg-3">
               <SideMenu
+                changeCategory={changeCategory}
+                activeCategory={filter}
                 categories={categories}
                 appName={"Shop Aiam"} />
             </div>
 
             <div className="col-lg-9">
               <Carousel images={images} />
-
+              <h1>Displaying {filter} movies</h1>
               <div className="row">
-                <MovieList movies={movies || []} />
+                <MovieList movies={filterMovies(movies) || []} />
 
               </div>
             </div>

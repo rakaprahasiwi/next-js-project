@@ -2,8 +2,6 @@ import { useEffect, useState } from "react"
 
 const MovieCreateForm = (props) => {
 
-    const [isInitialDataLoaded, setIsInitialDataLoaded] = useState(false)
-
     const defaultData = {
         name: '',
         description: '',

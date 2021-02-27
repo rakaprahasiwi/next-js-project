@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { useState } from "react"
 import { useRouter } from "next/router"
 import { createMovie } from "../actions"
 import Modal from "./modal"
@@ -27,7 +26,8 @@ const SideMenu = (props) => {
                 {
                     categories.map(category =>
                         <Link key={category.id} href="#">
-                            <a className="list-group-item">{category.name}</a>
+                            <a onClick={() => props.changeCategory(category.name)}
+                                className={`list-group-item ${props.activeCategory === category.name ? 'active' : ''}`}>{category.name}</a>
                         </Link>
                     )
                 }
